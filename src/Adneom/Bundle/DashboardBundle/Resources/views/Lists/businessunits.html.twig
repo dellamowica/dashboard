@@ -1,0 +1,8 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+{% block content %}
+	<ul>
+	{% for bu in business_units %}
+		<li>{{bu.getName}} - <a href="{{ path('dashboard_business_unit_edit', {"bu":bu.getId}) }}">edit</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

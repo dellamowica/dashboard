@@ -1,0 +1,9 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+
+{% block content %}
+	<main class="AdminForm">
+		{{ form_start(form) }}
+			{{ form_row(form.name) }}
+		{{ form_end(form) }}
+	</main>
+{% endblock %}

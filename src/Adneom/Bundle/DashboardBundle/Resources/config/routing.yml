@@ -1,0 +1,39 @@
+dashboard_root:
+    path:     /{daily}
+    defaults: { _controller: DashboardBundle:Default:index, daily: false }
+
+dashboard_homepage:
+    path:     /business/graph/{daily}
+    defaults: { _controller: DashboardBundle:Default:businessUnit, daily: false }
+
+dashboard_business_unit_list:
+    path:     /business/list
+    defaults: { _controller: DashboardBundle:BusinessUnit:list }
+
+dashboard_business_unit_edit:
+    path:     /business/edit/{bu}
+    defaults: { _controller: DashboardBundle:BusinessUnit:edit }
+
+dashboard_business_unit_create:
+    path:     /business/create
+    defaults: { _controller: DashboardBundle:BusinessUnit:create }
+
+dashboard_business_unit_hits:
+    path:     /business/hits/{daily}
+    defaults: { _controller: DashboardBundle:BusinessUnit:hits, daily: false }
+
+dashboard_country_hits:
+    path:     /country/hits/{daily}
+    defaults: { _controller: DashboardBundle:Country:hits, daily: false }    
+
+dashboard_country_graph:
+    path:     /country/graph/{daily}
+    defaults: { _controller: DashboardBundle:Default:country, daily: false }
+
+dashboard_business_manager_hits:
+    path:     /business/manager/hits/{daily}
+    defaults: { _controller: DashboardBundle:BusinessManager:hits, daily: false }    
+
+dashboard_business_manager_graph:
+    path:     /business/manager/graph/{daily}
+    defaults: { _controller: DashboardBundle:Default:businessManager, daily: false }

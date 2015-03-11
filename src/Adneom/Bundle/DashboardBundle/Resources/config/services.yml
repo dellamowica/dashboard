@@ -1,0 +1,4 @@
+services:
+    dashboard.business.event.manager:
+        class: Adneom\Bundle\DashboardBundle\Manager\BusinessEventManager
+        arguments: [@doctrine.orm.entity_manager]
