@@ -1,16 +1,13 @@
 {% extends "DashboardBundle::layout.html.twig" %}
-
-{% block content %}
-    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
+{% from 'DashboardBundle:Default:graph.html.twig' import graph as render_graph %}
+{% macro graph(id,route,isDaily,title) %}
     <script type="text/javascript">
     $(function () {
         function createGraph(){
             $.ajax({
                 url:"{{path(route, {daily:isDaily})}}"
             }).done(function(dataJson) {
-                //console.log(dataJson)
-                $('#container').highcharts({
+                $('#{{id}}').highcharts({
                     data: {
                         columns: dataJson
                     },
@@ -41,5 +38,9 @@
         setInterval(createGraph, 30000);
 
     });
-    </script>
+    </script>  
+{% endmacro %}
+{% block content %}
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    {{render_graph("container",route,isDaily,title)}}
 {% endblock %}

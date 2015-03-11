@@ -1,47 +1,8 @@
 {% extends "DashboardBundle::layout.html.twig" %}
-
+{% from 'DashboardBundle:Default:graph.html.twig' import graph as render_graph %}
 {% block content %}
 	{% for key, graph in config %}
 	    <div id="container-{{key}}" style="display:inline-block; width:30%; height: 400px; margin: 0 auto"></div>
-
-	    <script type="text/javascript">
-		    $(function () {
-		        function createGraph(){
-		            $.ajax({
-		                url:"{{path(graph['route'], {daily:graph['isDaily']})}}"
-		            }).done(function(dataJson) {
-		                //console.log(dataJson)
-		                $('#container-{{key}}').highcharts({
-		                    data: {
-		                        columns: dataJson
-		                    },
-		                    chart: {
-		                        type: 'column'
-		                    },
-		                    title: {
-		                        text: '{{graph['title']}}'
-		                    },
-		                    yAxis: {
-		                        allowDecimals: false,
-		                        title: {
-		                            text: 'Units'
-		                        }
-		                    },
-		                    tooltip: {
-		                        formatter: function () {
-		                            return '<b>' + this.series.name + '</b><br/>' +
-		                                this.point.y + ' ' + this.point.name.toLowerCase();
-		                        }
-		                    }
-		                });
-		            });
-		        }
-		        
-		        createGraph();
-
-		        setInterval(createGraph, 30000);
-
-		    });
-	    </script>
+            {{render_graph("container-"~key,graph['route'],graph['isDaily'],graph['title'])}}
     {% endfor %}
 {% endblock %}
