@@ -11,35 +11,19 @@ class BusinessEventManager
     {
         $this->em = $em;
     }
-
+    
     /**
-    * Counting and reordering the data for ajax rendering.
-    * @param string $daily (returned by the router)
-    * @return array
-    */
-    public function countHits($daily)
+     * Reordering the data so that it can be used in Highcharts
+     * @return array Columns for Highcharts
+     */
+    private function prepareColumns($items, $events, $types, $columnName)
     {
-        $events = $this->em
-            ->getRepository('DashboardBundle:DashboardEvent')
-            ->countBusinessUnitHits($daily === 'daily');
-
-        $repository = $this->em
-            ->getRepository('DashboardBundle:BusinessUnit');
-
-        $business_units = $repository->findAll();
-
-        $repository = $this->em
-            ->getRepository('DashboardBundle:DashboardEventType');
-
-        $types = $repository->findAll();
-
-        $data=[];
-        $data[0]=[null];
-        foreach ($business_units as $bu) {
-            $data[0][]=$bu->getName();
+        $data=[0=>[null]];
+        foreach ($items as $item) {
+            $data[0][]=$item->getName();
             foreach ($types as $type) {
-                $found = array_filter($events, function($v) use ($bu, $type) {
-                    if($v['bu'] == $bu->getName() and $v['type'] == $type->getName() ){
+                $found = array_filter($events, function($v) use ($item, $type, $columnName) {
+                    if($v[$columnName] == $item->getName() and $v['type'] == $type->getName() ){
                         return true;
                     }
                 });
@@ -62,44 +46,43 @@ class BusinessEventManager
     * @param string $daily (returned by the router)
     * @return array
     */
+    public function countHits($daily)
+    {
+        $events = $this->em
+            ->getRepository('DashboardBundle:DashboardEvent')
+            ->countBusinessUnitHits($daily === 'daily');
+
+        $business_units = $this->em
+            ->getRepository('DashboardBundle:BusinessUnit')
+            ->findAll();
+
+        $types = $this->em
+            ->getRepository('DashboardBundle:DashboardEventType')
+            ->findAll();
+        
+        return $this->prepareColumns($business_units, $events, $types, 'bu');
+    }
+
+    /**
+    * Counting and reordering the data for ajax rendering.
+    * @param string $daily (returned by the router)
+    * @return array
+    */
     public function countCountryHits($daily)
     {
         $events = $this->em
             ->getRepository('DashboardBundle:DashboardEvent')
             ->countCountryHits($daily === 'daily');
+        
+        $countries = $this->em
+            ->getRepository('DashboardBundle:Country')
+            ->findAll();
 
-        $repository = $this->em
-            ->getRepository('DashboardBundle:Country');
+        $types = $this->em
+            ->getRepository('DashboardBundle:DashboardEventType')
+            ->findAll();
 
-        $countries = $repository->findAll();
-
-        $repository = $this->em
-            ->getRepository('DashboardBundle:DashboardEventType');
-
-        $types = $repository->findAll();
-
-        $data=[];
-        $data[0]=[null];
-        foreach ($countries as $country) {
-            $data[0][]=$country->getName();
-            foreach ($types as $type) {
-                $found = array_filter($events, function($v) use ($country, $type) {
-                    if($v['country'] == $country->getName() and $v['type'] == $type->getName() ){
-                        return true;
-                    }
-                });
-                if(!isset($data[$type->getId()])){
-                    $data[$type->getId()]=[$type->getName()];
-                }
-                if(!empty($found)){
-                    $found = reset($found);
-                    $data[$type->getId()][]=$found['hits'];
-                } else {
-                    $data[$type->getId()][]=0;
-                }
-            } 
-        }
-        return $data;
+        return $this->prepareColumns($countries, $events, $types, 'country');
     }    
 
     /**
@@ -113,37 +96,14 @@ class BusinessEventManager
             ->getRepository('DashboardBundle:DashboardEvent')
             ->countBusinessManagerHits($daily === 'daily');
 
-        $repository = $this->em
-            ->getRepository('DashboardBundle:User');
+        $businessManagers = $this->em
+            ->getRepository('DashboardBundle:User')
+            ->findAll();
 
-        $businessManagers = $repository->findAll();
+        $types = $this->em
+            ->getRepository('DashboardBundle:DashboardEventType')
+            ->findAll();
 
-        $repository = $this->em
-            ->getRepository('DashboardBundle:DashboardEventType');
-
-        $types = $repository->findAll();
-
-        $data=[];
-        $data[0]=[null];
-        foreach ($businessManagers as $businessManager) {
-            $data[0][]=$businessManager->getName();
-            foreach ($types as $type) {
-                $found = array_filter($events, function($v) use ($businessManager, $type) {
-                    if($v['businessManager'] == $businessManager->getName() and $v['type'] == $type->getName() ){
-                        return true;
-                    }
-                });
-                if(!isset($data[$type->getId()])){
-                    $data[$type->getId()]=[$type->getName()];
-                }
-                if(!empty($found)){
-                    $found = reset($found);
-                    $data[$type->getId()][]=$found['hits'];
-                } else {
-                    $data[$type->getId()][]=0;
-                }
-            } 
-        }
-        return $data;
+        return $this->prepareColumns($businessManagers, $events, $types, 'businessManager');
     }   
 }
