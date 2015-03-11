@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11 mars 2015, 15:14:22
+    Author     : clementdellamonica
+*/
+
+header h1 img {
+  width: 200px;
+  margin-left: 2em; 
+}
+
+main.AdminForm {
+  padding: 2em;
+}
