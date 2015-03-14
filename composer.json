@@ -37,8 +37,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-            "cp vendor/components/jquery/* web/js/",
             "cp -r vendor/twitter/bootstrap/dist/* web/",
+            "cp -r vendor/components/jquery/* web/js/",
             "cp -r vendor/netbrain/highcharts-js/* web/js/"
         ],
         "post-update-cmd": [
@@ -48,8 +48,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-            "cp vendor/components/jquery/* web/js/",
             "cp -r vendor/twitter/bootstrap/dist/* web/",
+            "cp -r vendor/components/jquery/* web/js/",
             "cp -r vendor/netbrain/highcharts-js/* web/js/"
         ]
     },
