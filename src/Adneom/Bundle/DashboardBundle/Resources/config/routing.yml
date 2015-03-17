@@ -1,6 +1,6 @@
 dashboard_root:
     path:     /{weekly}
-    defaults: { _controller: DashboardBundle:Default:index, weekly: false }
+    defaults: { _controller: DashboardBundle:Default:index, weekly: 'weekly' }
 
 dashboard_homepage:
     path:     /business/graph/{weekly}
