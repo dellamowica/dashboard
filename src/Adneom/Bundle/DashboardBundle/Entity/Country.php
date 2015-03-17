@@ -13,6 +13,7 @@ class Country
     /**
      * @ORM\Column(type="integer", name="country_id")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
