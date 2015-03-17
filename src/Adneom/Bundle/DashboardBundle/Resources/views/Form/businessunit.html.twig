@@ -1,9 +1,7 @@
-{% extends "DashboardBundle::layout.html.twig" %}
+{% extends "DashboardBundle:Form:form.html.twig" %}
 
-{% block content %}
-	<main class="AdminForm">
-		{{ form_start(form) }}
-			{{ form_row(form.name) }}
-		{{ form_end(form) }}
-	</main>
+{% block fields %}
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+    {{ form_end(form) }}
 {% endblock %}

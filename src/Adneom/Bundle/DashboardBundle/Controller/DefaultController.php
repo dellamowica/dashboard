@@ -6,47 +6,47 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($daily)
+    public function indexAction($weekly)
     {
         return $this->render('DashboardBundle:Default:multigraph.html.twig', ['config' => [[
             'title' => 'Business unit',
             'route' => 'dashboard_business_unit_hits', 
-            'isDaily' => $daily
+            'isWeekly' => $weekly
         ],[
             'title' => 'Country', 
             'route' => 'dashboard_country_hits', 
-            'isDaily' => $daily
+            'isWeekly' => $weekly
         ],[
             'title' => 'Business Manager', 
             'route' => 'dashboard_business_manager_hits', 
-            'isDaily' => $daily
+            'isWeekly' => $weekly
         ]]]);
     }
 
-    public function businessUnitAction($daily)
+    public function businessUnitAction($weekly)
     {
         return $this->render('DashboardBundle:Default:graph.html.twig', [
             'title' => 'Business unit',
             'route' => 'dashboard_business_unit_hits', 
-            'isDaily' => $daily
+            'isWeekly' => $weekly
         ]);
     }
 
-    public function countryAction($daily)
+    public function countryAction($weekly)
     {
         return $this->render('DashboardBundle:Default:graph.html.twig', [
             'title' => 'Country', 
             'route' => 'dashboard_country_hits', 
-            'isDaily' => $daily
+            'isWeekly' => $weekly
         ]);
     }
 
-    public function businessManagerAction($daily)
+    public function businessManagerAction($weekly)
     {
         return $this->render('DashboardBundle:Default:graph.html.twig', [
             'title' => 'Business Manager', 
             'route' => 'dashboard_business_manager_hits', 
-            'isDaily' => $daily
+            'isWeekly' => $weekly
         ]);
     }
 }

@@ -16,3 +16,7 @@ header h1 img {
 main.AdminForm {
   padding: 2em;
 }
+
+.list-options {
+    margin-bottom: 1em;
+}

@@ -1,0 +1,14 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+
+{% block content %}
+    <main class="AdminForm">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success" role="alert">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% block fields %}
+            {{form(form)}}
+        {% endblock %}
+    </main>
+{% endblock %}

@@ -3,6 +3,6 @@
 {% block content %}
 	{% for key, graph in config %}
 	    <div id="container-{{key}}" style="display:inline-block; width:30%; height: 400px; margin: 0 auto"></div>
-            {{render_graph("container-"~key,graph['route'],graph['isDaily'],graph['title'])}}
+            {{render_graph("container-"~key,graph['route'],graph['isWeekly'],graph['title'])}}
     {% endfor %}
 {% endblock %}

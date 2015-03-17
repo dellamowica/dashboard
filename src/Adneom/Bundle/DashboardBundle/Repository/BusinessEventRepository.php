@@ -8,10 +8,10 @@ class BusinessEventRepository extends EntityRepository
 {
     /**
     * Returns a list of events business unit and count
-    * @param boolean $daily Search for today's hits
+    * @param boolean $weekly Search for this week's hits
     * @return array
     */
-    public function countBusinessUnitHits($daily)
+    public function countBusinessUnitHits($weekly)
     {
         $builder = $this->createQueryBuilder('event')
             ->select('t.name as type','b.name as bu','count( distinct e ) as hits')
@@ -21,8 +21,9 @@ class BusinessEventRepository extends EntityRepository
             ->join('e.type', 't')
             ->groupBy('b.name','e.type');
         
-        if(true === $daily) {
-            $builder->where('DATE_DIFF(e.date, :current_date) = 0')
+        if(true === $weekly) {
+            $builder->where('e.date BETWEEN :last_monday AND :current_date')
+                    ->setParameter('last_monday',date('Y-m-d',strtotime( "previous monday")))
                     ->setParameter('current_date',date('Y-m-d'));
         }
 
@@ -34,10 +35,10 @@ class BusinessEventRepository extends EntityRepository
     
     /**
     * Returns a list of events business unit and count
-    * @param boolean $daily Search for today's hits
+    * @param boolean $weekly Search for this week's hits
     * @return array
     */
-    public function countCountryHits($daily)
+    public function countCountryHits($weekly)
     {
         $builder = $this->createQueryBuilder('event')
             ->select('t.name as type','c.name as country','count( distinct e ) as hits')
@@ -48,8 +49,9 @@ class BusinessEventRepository extends EntityRepository
             ->join('e.type', 't')
             ->groupBy('c.name','e.type');
         
-        if(true === $daily) {
-            $builder->where('DATE_DIFF(e.date, :current_date) = 0')
+        if(true === $weekly) {
+            $builder->where('e.date BETWEEN :last_monday AND :current_date')
+                    ->setParameter('last_monday',date('Y-m-d',strtotime( "previous monday")))
                     ->setParameter('current_date',date('Y-m-d'));
         }
 
@@ -60,10 +62,10 @@ class BusinessEventRepository extends EntityRepository
     
      /**
     * Returns a list of events BM  and count
-    * @param boolean $daily Search for today's hits
+    * @param boolean $weekly Search for this week's hits
     * @return array
     */
-    public function countBusinessManagerHits($daily)
+    public function countBusinessManagerHits($weekly)
     {
         $builder = $this->createQueryBuilder('event')
             ->select('t.name as type','CONCAT(CONCAT(u.lastname,\' \'), u.firstname) as businessManager','count( distinct e ) as hits')
@@ -72,8 +74,9 @@ class BusinessEventRepository extends EntityRepository
             ->join('e.type', 't')
             ->groupBy('u.id','e.type');
         
-        if(true === $daily) {
-            $builder->where('DATE_DIFF(e.date, :current_date) = 0')
+        if(true === $weekly) {
+            $builder->where('e.date BETWEEN :last_monday AND :current_date')
+                    ->setParameter('last_monday',date('Y-m-d',strtotime( "previous monday")))
                     ->setParameter('current_date',date('Y-m-d'));
         }
 

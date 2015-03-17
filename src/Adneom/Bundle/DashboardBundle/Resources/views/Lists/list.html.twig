@@ -1,0 +1,23 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+{% block content %}
+    <main class="AdminForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {% block list_title %}
+                    List title
+                {% endblock %}
+            </div>
+            <div class="panel-body">
+                <div class="list-options">
+                    {% block options %}
+                    {% endblock %}
+                </div>
+                <ul class="list-group">
+                {% block list_content %}
+                    <li class="list-group-item">Item</li>
+                {% endblock %}
+                </ul>
+            </div>
+        </div>
+    </main>
+{% endblock %}

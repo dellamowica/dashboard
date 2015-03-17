@@ -43,14 +43,14 @@ class BusinessEventManager
 
     /**
     * Counting and reordering the data for ajax rendering.
-    * @param string $daily (returned by the router)
+    * @param string $weekly (returned by the router)
     * @return array
     */
-    public function countHits($daily)
+    public function countHits($weekly = false)
     {
         $events = $this->em
             ->getRepository('DashboardBundle:DashboardEvent')
-            ->countBusinessUnitHits($daily === 'daily');
+            ->countBusinessUnitHits($weekly === 'weekly');
 
         $business_units = $this->em
             ->getRepository('DashboardBundle:BusinessUnit')
@@ -65,14 +65,14 @@ class BusinessEventManager
 
     /**
     * Counting and reordering the data for ajax rendering.
-    * @param string $daily (returned by the router)
+    * @param string $weekly (returned by the router)
     * @return array
     */
-    public function countCountryHits($daily)
+    public function countCountryHits($weekly)
     {
         $events = $this->em
             ->getRepository('DashboardBundle:DashboardEvent')
-            ->countCountryHits($daily === 'daily');
+            ->countCountryHits($weekly === 'weekly');
         
         $countries = $this->em
             ->getRepository('DashboardBundle:Country')
@@ -87,14 +87,14 @@ class BusinessEventManager
 
     /**
     * Counting and reordering the data for ajax rendering.
-    * @param string $daily (returned by the router)
+    * @param string $weekly (returned by the router)
     * @return array
     */
-    public function countBusinessManagerHits($daily)
+    public function countBusinessManagerHits($weekly)
     {
         $events = $this->em
             ->getRepository('DashboardBundle:DashboardEvent')
-            ->countBusinessManagerHits($daily === 'daily');
+            ->countBusinessManagerHits($weekly === 'weekly');
 
         $businessManagers = $this->em
             ->getRepository('DashboardBundle:User')

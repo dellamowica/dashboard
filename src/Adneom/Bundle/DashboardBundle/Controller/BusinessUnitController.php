@@ -21,10 +21,10 @@ class BusinessUnitController extends Controller
 
     /**
     * Returns a JSON with the hits for a business unit
-    * @param boolean $daily
+    * @param boolean $weekly
     */
-    public function hitsAction($daily){
-        $data = $this->get('dashboard.business.event.manager')->countHits($daily);
+    public function hitsAction($weekly){
+        $data = $this->get('dashboard.business.event.manager')->countHits($weekly);
 
         $response = new JsonResponse();
         $response->setData($data);
@@ -47,6 +47,10 @@ class BusinessUnitController extends Controller
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($form->getData());
             $em->flush();
+            $this->addFlash(
+                'notice',
+                'Your changes were saved!'
+            );
             return $this->redirect( $this->generateUrl('dashboard_business_unit_edit', array('bu' => $bu->getId())) );
         }
         return $this->render('DashboardBundle:Form:businessunit.html.twig', array('form' => $form->createView()));

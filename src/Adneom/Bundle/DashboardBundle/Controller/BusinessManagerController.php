@@ -21,10 +21,10 @@ class BusinessManagerController extends Controller
 
     /**
     * Returns a JSON with the hits for a business manager
-    * @param boolean $daily
+    * @param boolean $weekly
     */
-    public function hitsAction($daily){
-        $data = $this->get('dashboard.business.event.manager')->countBusinessManagerHits($daily);
+    public function hitsAction($weekly){
+        $data = $this->get('dashboard.business.event.manager')->countBusinessManagerHits($weekly);
 
         $response = new JsonResponse();
         $response->setData($data);

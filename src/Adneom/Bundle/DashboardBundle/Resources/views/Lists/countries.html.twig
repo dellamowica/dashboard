@@ -1,0 +1,21 @@
+{% extends "DashboardBundle:Lists:list.html.twig" %}
+{% block list_title %}
+    Country list
+{% endblock %}
+
+{% block options %}
+    <a href="{{ path('dashboard_business_unit_create') }}">
+        <span class="glyphicon glyphicon-plus"></span> Add a country
+    </a>
+{% endblock %}
+
+{% block list_content %}
+    {% for country in countries %}
+        <li class="list-group-item">
+            <a href="{{ path('dashboard_country_edit', {"country":country.getId}) }}">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a> 
+            {{country.getName}} 
+        </li>
+    {% endfor %}
+{% endblock %}

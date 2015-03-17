@@ -1,8 +1,21 @@
-{% extends "DashboardBundle::layout.html.twig" %}
-{% block content %}
-	<ul>
-	{% for bu in business_units %}
-		<li>{{bu.getName}} - <a href="{{ path('dashboard_business_unit_edit', {"bu":bu.getId}) }}">edit</a></li>
-	{% endfor %}
-	</ul>
+{% extends "DashboardBundle:Lists:list.html.twig" %}
+{% block list_title %}
+    Business unit list
+{% endblock %}
+
+{% block options %}
+    <a href="{{ path('dashboard_business_unit_create') }}">
+        <span class="glyphicon glyphicon-plus"></span> Add a business unit
+    </a>
+{% endblock %}
+
+{% block list_content %}
+    {% for bu in business_units %}
+        <li class="list-group-item">
+            <a href="{{ path('dashboard_business_unit_edit', {"bu":bu.getId}) }}">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a> 
+            {{bu.getName}} 
+        </li>
+    {% endfor %}
 {% endblock %}
