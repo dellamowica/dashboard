@@ -29,5 +29,11 @@ class BusinessEventManagerTest extends WebTestCase{
         $this->assertTrue($manager instanceof BusinessEventManager);
         $this->assertInternalType('array',$manager->countHits());
         $this->assertInternalType('array',$manager->countHits(true));
+        
+        $this->assertInternalType('array',$manager->countCountryHits(false));
+        $this->assertInternalType('array',$manager->countCountryHits(true));
+        
+        $this->assertInternalType('array',$manager->countBusinessManagerHits(false));
+        $this->assertInternalType('array',$manager->countBusinessManagerHits(true));
     }
 }
