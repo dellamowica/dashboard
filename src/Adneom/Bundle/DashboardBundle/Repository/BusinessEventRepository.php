@@ -24,7 +24,7 @@ class BusinessEventRepository extends EntityRepository
         if(true === $weekly) {
             $builder->where('e.date BETWEEN :last_monday AND :current_date')
                     ->setParameter('last_monday',date('Y-m-d',strtotime( "previous monday")))
-                    ->setParameter('current_date',date('Y-m-d'));
+                    ->setParameter('current_date',date('Y-m-d H:i:s'));
         }
 
         $query = $builder->getQuery();
@@ -52,7 +52,7 @@ class BusinessEventRepository extends EntityRepository
         if(true === $weekly) {
             $builder->where('e.date BETWEEN :last_monday AND :current_date')
                     ->setParameter('last_monday',date('Y-m-d',strtotime( "previous monday")))
-                    ->setParameter('current_date',date('Y-m-d'));
+                    ->setParameter('current_date',date('Y-m-d H:i:s'));
         }
 
         $query = $builder->getQuery();
@@ -77,7 +77,7 @@ class BusinessEventRepository extends EntityRepository
         if(true === $weekly) {
             $builder->where('e.date BETWEEN :last_monday AND :current_date')
                     ->setParameter('last_monday',date('Y-m-d',strtotime( "previous monday")))
-                    ->setParameter('current_date',date('Y-m-d'));
+                    ->setParameter('current_date',date('Y-m-d H:i:s'));
         }
 
         $query = $builder->getQuery();
